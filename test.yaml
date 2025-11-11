@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: IC9
+
+Parameters:
+  InstanceType:
+    Description: WebServer EC2 instance type
+    Type: String
+    Default: t2.micro
+    AllowedValues:
+      - t3.micro
+      - t2.micro
+    ConstraintDescription: must be a valid EC2 instance type.
+
+Resources:
+  MyEC2Instance:
+    Type : AWS::EC2::Instance
+    Properties: 
+      ImageId: ami-0ecb62995f68bb549
+      InstanceType: !Ref InstanceType
+      KeyName: vockey
+
+Outputs:
+  Ec2PublicIP:
+    Description: Ec2 instance Public IP
+    Value: !GetAtt MyEc2Instance.PublicIP
